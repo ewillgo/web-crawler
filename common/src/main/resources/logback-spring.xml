@@ -34,7 +34,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.trianglex.webcrawler.core" level="INFO" />
+    <logger name="org.trianglex.webcrawler" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="console"/>

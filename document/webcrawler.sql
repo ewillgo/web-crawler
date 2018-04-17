@@ -17,6 +17,7 @@ create index idx_task_type_oper_by on task_type(oper_by);
 -- 任务表
 create table task (
   id int not null auto_increment primary key comment '主键ID',
+  user_id int not null comment '用户ID',
   type_id int not null comment '类型ID',
   name varchar(255) not null comment '任务名称',
   description varchar(1000) null comment '任务描述',
@@ -29,6 +30,7 @@ create table task (
   update_time datetime null on update current_timestamp comment '更新时间'
 ) engine InnoDB charset utf8;
 
-create index idx_type_id on task(type_id);
+create index idx_task_user_id on task(user_id);
+create index idx_task_type_id on task(type_id);
 create unique index uniq_task_name on task(name);
 create index idx_task_oper_by on task(oper_by);
