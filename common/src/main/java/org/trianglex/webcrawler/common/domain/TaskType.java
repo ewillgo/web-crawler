@@ -85,4 +85,17 @@ public class TaskType {
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
+
+    public enum Status {
+        ON(1), OFF(0);
+        private Integer status;
+
+        Status(Integer status) {
+            this.status = status;
+        }
+
+        public Integer getStatus() {
+            return status;
+        }
+    }
 }

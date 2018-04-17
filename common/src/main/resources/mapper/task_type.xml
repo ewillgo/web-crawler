@@ -2,25 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.trianglex.webcrawler.common.dao.TaskTypeDAO">
 
+    <select id="getTaskTypeByPaginate" resultType="org.trianglex.webcrawler.common.domain.TaskType">
+        select *
+        from task_type
+        where deleted = 0
+    </select>
+
     <select id="getTaskTypes" resultType="org.trianglex.webcrawler.common.domain.TaskType">
-        select id, name, description, package_name
+        select id, `name`, description, package_name
         from task_type
         where status = 1
         and deleted = 0
     </select>
 
-    <insert id="addTaskType" keyColumn="id" keyProperty="id">
-        insert into task_type (name, description, package_name, status, oper_by)
-        values (#{name}, #{description}, #{package_name}, #{status}, #{oper_by})
+    <insert id="addTaskType" keyColumn="id" keyProperty="id"
+            parameterType="org.trianglex.webcrawler.common.domain.TaskType">
+        insert into task_type (`name`, description, package_name, oper_by)
+        values (#{name}, #{description}, #{packageName}, #{operBy})
     </insert>
 
     <update id="updateTaskTypeById">
         update task_type
-        <foreach collection="data" index="k" item="v">
-            <if test="v != null and v != ''">
-                <set>${k} = ${v}</set>
+        <set>
+            <if test="name != null">
+                `name` = #{name},
             </if>
-        </foreach>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="packageName != null">
+                package_name = #{packageName},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="operBy != null">
+                oper_by = #{operBy},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
         where id = #{id}
     </update>
 
