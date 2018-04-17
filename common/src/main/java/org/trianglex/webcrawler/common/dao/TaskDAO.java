@@ -1,4 +1,7 @@
 package org.trianglex.webcrawler.common.dao;
 
-public class DemoDAO {
+//@Mapper
+public interface TaskDAO {
+
+
 }
